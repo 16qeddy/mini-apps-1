@@ -1,0 +1,26 @@
+#board{
+  background-color:red;
+  width: 525px;
+  height: 525px;
+  border-color: black;
+  border: solid;
+}
+
+.row{
+  display: flex;
+  color: black;
+}
+
+.item{
+  font-size: 100px;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-bottom: 30px;
+  cursor: pointer;
+}
+
+#restart{
+  cursor: pointer;
+  background-color: red;
+  border-radius: 50%;
+}
