@@ -10,7 +10,7 @@ var boardState = {
 }
 
 
-//set x or o
+//set x or o on click
 function updateBoard(event, column, row){
   let spot = boardState.board[row][column];
   if(spot === '( )'){
