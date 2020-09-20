@@ -1,20 +1,36 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const fs = require('fs');
 const app = express()
 const port = 3000
 
+
 // app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 app.use(express.urlencoded({
   extended: true
 }))
 app.use(express.static('client'))
 
-app.post('/formSubmit', (req, res) => {
-  let csv = createCVS(JSON.parse(req.body.data));
-  console.log(csv);
-  res.redirect('/');
-  res.end();
+app.post('/formSubmit', async (req, res) => {
+
+  try{
+    let csv = createCVS(JSON.parse(req.body.data));
+    fs.writeFile('./samples/csv_report.csv', csv, (err)=>{
+      if(err){
+        throw err;
+      }
+      console.log('file created!');
+    });
+    console.log('we made it');
+    res.sendFile('/home/goat/code/hrr48-mini-apps-1/challenge_2/samples/csv_report.csv');
+  }
+  catch(err){
+    console.log(err);
+    res.redirect('/');
+    res.end();
+  };
 })
 
 // app.post('/formData', (req, res)=>{
